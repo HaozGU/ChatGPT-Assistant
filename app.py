@@ -14,8 +14,8 @@ st.markdown(css_code, unsafe_allow_html=True)
 
 if "initial_settings" not in st.session_state:
     # 历史聊天窗口
-    st.session_state["path"] = 'history_chats_file'
-    st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
+    # st.session_state["path"] = 'history_chats_file'
+    # st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
     # ss参数初始化
     st.session_state['delete_dict'] = {}
     st.session_state['delete_count'] = 0
@@ -24,6 +24,19 @@ if "initial_settings" not in st.session_state:
     st.session_state['error_info'] = ''
     st.session_state["current_chat_index"] = 0
     st.session_state['user_input_content'] = ''
+    
+    show_history_chats = st.empty()  # 创建空容器
+
+    # 在show_history_chats容器中显示历史聊天窗口
+    with show_history_chats:
+        st.session_state["path"] = 'history_chats_file'
+        st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
+
+    # 添加复选框或按钮来控制历史聊天窗口的可见性
+    show_history_toggle = st.checkbox('显示历史聊天窗口')
+    if not show_history_toggle:
+        show_history_chats.empty()
+    
     # 读取全局设置
     if os.path.exists('./set.json'):
         with open('./set.json', 'r', encoding='utf-8') as f:
