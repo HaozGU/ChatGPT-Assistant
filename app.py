@@ -102,23 +102,23 @@ def delete_chat_fun():
     remove_data(st.session_state["path"], current_chat)
 
 
-# with st.sidebar:
-#     c1, c2 = st.columns(2)
-#     create_chat_button = c1.button('新建', use_container_width=True, key='create_chat_button')
-#     if create_chat_button:
-#         create_chat_fun()
-#         st.experimental_rerun()
+with st.sidebar:
+    c1, c2 = st.columns(2)
+    create_chat_button = c1.button('新建', use_container_width=True, key='create_chat_button')
+    if create_chat_button:
+        create_chat_fun()
+        st.experimental_rerun()
 
-#     delete_chat_button = c2.button('删除', use_container_width=True, key='delete_chat_button')
-#     if delete_chat_button:
-#         delete_chat_fun()
-#         st.experimental_rerun()
+    delete_chat_button = c2.button('删除', use_container_width=True, key='delete_chat_button')
+    if delete_chat_button:
+        delete_chat_fun()
+        st.experimental_rerun()
 
 with st.sidebar:
-    # if ("set_chat_name" in st.session_state) and st.session_state['set_chat_name'] != '':
-    #     reset_chat_name_fun(st.session_state['set_chat_name'])
-    #     st.session_state['set_chat_name'] = ''
-    #     st.experimental_rerun()
+    if ("set_chat_name" in st.session_state) and st.session_state['set_chat_name'] != '':
+        reset_chat_name_fun(st.session_state['set_chat_name'])
+        st.session_state['set_chat_name'] = ''
+        st.experimental_rerun()
 
     st.write("\n")
     st.write("\n")
