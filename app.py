@@ -8,10 +8,10 @@ from requests.models import ChunkedEncodingError
 from streamlit.components import v1
 from voice_toolkit import voice_toolkit
 
-st.markdown('<style>div[data-testid="stRadio"] > div > div > div { display: none !important; }</style>', unsafe_allow_html=True)
 st.set_page_config(page_title='ChatGPT Assistant', layout='wide', page_icon='🤖')
 # 自定义元素样式
 st.markdown(css_code, unsafe_allow_html=True)
+st.markdown('<style>div[data-testid="stRadio"] > div > div > div { display: none !important; }</style>', unsafe_allow_html=True)
 
 if "initial_settings" not in st.session_state:
     # 历史聊天窗口
