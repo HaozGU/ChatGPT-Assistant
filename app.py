@@ -40,12 +40,13 @@ with st.sidebar:
     chat_container = st.container()
     with chat_container:
         current_chat = st.radio(
-            label='历史聊天窗口',
-            format_func=lambda x: x.split('_')[0] if '_' in x else x,
-            options=st.session_state['history_chats'],
+            # label='历史聊天窗口',
+            # format_func=lambda x: x.split('_')[0] if '_' in x else x,
+            # options=st.session_state['history_chats'],
             label_visibility='collapsed',
             index=st.session_state["current_chat_index"],
-            key='current_chat' + st.session_state['history_chats'][st.session_state["current_chat_index"]],
+            key='current_chat'
+            # + st.session_state['history_chats'][st.session_state["current_chat_index"]],
             # on_change=current_chat_callback  # 此处不适合用回调，无法识别到窗口增减的变动
         )
     st.write("---")
@@ -102,23 +103,23 @@ def delete_chat_fun():
     remove_data(st.session_state["path"], current_chat)
 
 
-with st.sidebar:
-    c1, c2 = st.columns(2)
-    create_chat_button = c1.button('新建', use_container_width=True, key='create_chat_button')
-    if create_chat_button:
-        create_chat_fun()
-        st.experimental_rerun()
+# with st.sidebar:
+#     c1, c2 = st.columns(2)
+#     create_chat_button = c1.button('新建', use_container_width=True, key='create_chat_button')
+#     if create_chat_button:
+#         create_chat_fun()
+#         st.experimental_rerun()
 
-    delete_chat_button = c2.button('删除', use_container_width=True, key='delete_chat_button')
-    if delete_chat_button:
-        delete_chat_fun()
-        st.experimental_rerun()
+#     delete_chat_button = c2.button('删除', use_container_width=True, key='delete_chat_button')
+#     if delete_chat_button:
+#         delete_chat_fun()
+#         st.experimental_rerun()
 
 with st.sidebar:
-    if ("set_chat_name" in st.session_state) and st.session_state['set_chat_name'] != '':
-        reset_chat_name_fun(st.session_state['set_chat_name'])
-        st.session_state['set_chat_name'] = ''
-        st.experimental_rerun()
+    # if ("set_chat_name" in st.session_state) and st.session_state['set_chat_name'] != '':
+    #     reset_chat_name_fun(st.session_state['set_chat_name'])
+    #     st.session_state['set_chat_name'] = ''
+    #     st.experimental_rerun()
 
     st.write("\n")
     st.write("\n")
@@ -411,4 +412,3 @@ if ("r" in st.session_state) and (current_chat == st.session_state["chat_of_r"])
 # 添加事件监听
 v1.html(js_code, height=0)
 
-st.beta_set_page_config(layout="wide")
