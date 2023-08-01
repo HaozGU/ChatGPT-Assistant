@@ -410,3 +410,5 @@ if ("r" in st.session_state) and (current_chat == st.session_state["chat_of_r"])
 
 # 添加事件监听
 v1.html(js_code, height=0)
+
+st.beta_set_page_config(layout="wide")
