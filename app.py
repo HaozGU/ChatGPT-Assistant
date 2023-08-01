@@ -14,8 +14,8 @@ st.markdown(css_code, unsafe_allow_html=True)
 
 if "initial_settings" not in st.session_state:
     # 历史聊天窗口
-    st.session_state["path"] = 'history_chats_file'
-    st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
+    # st.session_state["path"] = 'history_chats_file'
+    # st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
     # ss参数初始化
     st.session_state['delete_dict'] = {}
     st.session_state['delete_count'] = 0
@@ -34,21 +34,21 @@ if "initial_settings" not in st.session_state:
     # 设置完成
     st.session_state["initial_settings"] = True
 
-with st.sidebar:
-    st.markdown("# 🤖 聊天窗口")
-    # 创建容器的目的是配合自定义组件的监听操作
-    chat_container = st.container()
-    with chat_container:
-        current_chat = st.radio(
-            label='历史聊天窗口',
-            format_func=lambda x: x.split('_')[0] if '_' in x else x,
-            options=st.session_state['history_chats'],
-            label_visibility='collapsed',
-            index=st.session_state["current_chat_index"],
-            key='current_chat' + st.session_state['history_chats'][st.session_state["current_chat_index"]],
-            # on_change=current_chat_callback  # 此处不适合用回调，无法识别到窗口增减的变动
-        )
-    st.write("---")
+# with st.sidebar:
+#     st.markdown("# 🤖 聊天窗口")
+#     # 创建容器的目的是配合自定义组件的监听操作
+#     chat_container = st.container()
+#     with chat_container:
+#         current_chat = st.radio(
+#             label='历史聊天窗口',
+#             format_func=lambda x: x.split('_')[0] if '_' in x else x,
+#             options=st.session_state['history_chats'],
+#             label_visibility='collapsed',
+#             index=st.session_state["current_chat_index"],
+#             key='current_chat' + st.session_state['history_chats'][st.session_state["current_chat_index"]],
+#             # on_change=current_chat_callback  # 此处不适合用回调，无法识别到窗口增减的变动
+#         )
+#     st.write("---")
 
 
 # 数据写入文件
@@ -102,27 +102,27 @@ def delete_chat_fun():
     remove_data(st.session_state["path"], current_chat)
 
 
+# with st.sidebar:
+#     c1, c2 = st.columns(2)
+#     create_chat_button = c1.button('新建', use_container_width=True, key='create_chat_button')
+#     if create_chat_button:
+#         create_chat_fun()
+#         st.experimental_rerun()
+
+#     delete_chat_button = c2.button('删除', use_container_width=True, key='delete_chat_button')
+#     if delete_chat_button:
+#         delete_chat_fun()
+#         st.experimental_rerun()
+
 with st.sidebar:
-    c1, c2 = st.columns(2)
-    create_chat_button = c1.button('新建', use_container_width=True, key='create_chat_button')
-    if create_chat_button:
-        create_chat_fun()
-        st.experimental_rerun()
+    # if ("set_chat_name" in st.session_state) and st.session_state['set_chat_name'] != '':
+    #     reset_chat_name_fun(st.session_state['set_chat_name'])
+    #     st.session_state['set_chat_name'] = ''
+    #     st.experimental_rerun()
 
-    delete_chat_button = c2.button('删除', use_container_width=True, key='delete_chat_button')
-    if delete_chat_button:
-        delete_chat_fun()
-        st.experimental_rerun()
-
-with st.sidebar:
-    if ("set_chat_name" in st.session_state) and st.session_state['set_chat_name'] != '':
-        reset_chat_name_fun(st.session_state['set_chat_name'])
-        st.session_state['set_chat_name'] = ''
-        st.experimental_rerun()
-
-    st.write("\n")
-    st.write("\n")
-    st.text_input("设定窗口名称：", key="set_chat_name", placeholder="点击输入")
+    # st.write("\n")
+    # st.write("\n")
+    # st.text_input("设定窗口名称：", key="set_chat_name", placeholder="点击输入")
     st.selectbox("选择模型：", index=0, options=['gpt-3.5-turbo', 'gpt-4'], key="select_model")
     st.write("\n")
     st.caption("""
