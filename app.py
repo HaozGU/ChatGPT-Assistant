@@ -51,55 +51,55 @@ if "initial_settings" not in st.session_state:
 #     st.write("---")
 
 
-# 数据写入文件
-def write_data(new_chat_name=current_chat):
-    if "apikey" in st.secrets:
-        st.session_state["paras"] = {
-            "temperature": st.session_state["temperature" + current_chat],
-            "top_p": st.session_state["top_p" + current_chat],
-            "presence_penalty": st.session_state["presence_penalty" + current_chat],
-            "frequency_penalty": st.session_state["frequency_penalty" + current_chat],
-        }
-        st.session_state["contexts"] = {
-            "context_select": st.session_state["context_select" + current_chat],
-            "context_input": st.session_state["context_input" + current_chat],
-            "context_level": st.session_state["context_level" + current_chat],
-        }
-        save_data(st.session_state["path"], new_chat_name, st.session_state["history" + current_chat],
-                  st.session_state["paras"], st.session_state["contexts"])
+# # 数据写入文件
+# def write_data(new_chat_name=current_chat):
+#     if "apikey" in st.secrets:
+#         st.session_state["paras"] = {
+#             "temperature": st.session_state["temperature" + current_chat],
+#             "top_p": st.session_state["top_p" + current_chat],
+#             "presence_penalty": st.session_state["presence_penalty" + current_chat],
+#             "frequency_penalty": st.session_state["frequency_penalty" + current_chat],
+#         }
+#         st.session_state["contexts"] = {
+#             "context_select": st.session_state["context_select" + current_chat],
+#             "context_input": st.session_state["context_input" + current_chat],
+#             "context_level": st.session_state["context_level" + current_chat],
+#         }
+#         save_data(st.session_state["path"], new_chat_name, st.session_state["history" + current_chat],
+#                   st.session_state["paras"], st.session_state["contexts"])
 
 
-def reset_chat_name_fun(chat_name):
-    chat_name = chat_name + '_' + str(uuid.uuid4())
-    new_name = filename_correction(chat_name)
-    current_chat_index = st.session_state['history_chats'].index(current_chat)
-    st.session_state['history_chats'][current_chat_index] = new_name
-    st.session_state["current_chat_index"] = current_chat_index
-    # 写入新文件
-    write_data(new_name)
-    # 转移数据
-    st.session_state['history' + new_name] = st.session_state['history' + current_chat]
-    for item in ["context_select", "context_input", "context_level", *initial_content_all['paras']]:
-        st.session_state[item + new_name + "value"] = st.session_state[item + current_chat + "value"]
-    remove_data(st.session_state["path"], current_chat)
+# def reset_chat_name_fun(chat_name):
+#     chat_name = chat_name + '_' + str(uuid.uuid4())
+#     new_name = filename_correction(chat_name)
+#     current_chat_index = st.session_state['history_chats'].index(current_chat)
+#     st.session_state['history_chats'][current_chat_index] = new_name
+#     st.session_state["current_chat_index"] = current_chat_index
+#     # 写入新文件
+#     write_data(new_name)
+#     # 转移数据
+#     st.session_state['history' + new_name] = st.session_state['history' + current_chat]
+#     for item in ["context_select", "context_input", "context_level", *initial_content_all['paras']]:
+#         st.session_state[item + new_name + "value"] = st.session_state[item + current_chat + "value"]
+#     remove_data(st.session_state["path"], current_chat)
 
 
-def create_chat_fun():
-    st.session_state['history_chats'] = ['New Chat_' + str(uuid.uuid4())] + st.session_state['history_chats']
-    st.session_state["current_chat_index"] = 0
+# def create_chat_fun():
+#     st.session_state['history_chats'] = ['New Chat_' + str(uuid.uuid4())] + st.session_state['history_chats']
+#     st.session_state["current_chat_index"] = 0
 
 
-def delete_chat_fun():
-    if len(st.session_state['history_chats']) == 1:
-        chat_init = 'New Chat_' + str(uuid.uuid4())
-        st.session_state['history_chats'].append(chat_init)
-    pre_chat_index = st.session_state['history_chats'].index(current_chat)
-    if pre_chat_index > 0:
-        st.session_state["current_chat_index"] = st.session_state['history_chats'].index(current_chat) - 1
-    else:
-        st.session_state["current_chat_index"] = 0
-    st.session_state['history_chats'].remove(current_chat)
-    remove_data(st.session_state["path"], current_chat)
+# def delete_chat_fun():
+#     if len(st.session_state['history_chats']) == 1:
+#         chat_init = 'New Chat_' + str(uuid.uuid4())
+#         st.session_state['history_chats'].append(chat_init)
+#     pre_chat_index = st.session_state['history_chats'].index(current_chat)
+#     if pre_chat_index > 0:
+#         st.session_state["current_chat_index"] = st.session_state['history_chats'].index(current_chat) - 1
+#     else:
+#         st.session_state["current_chat_index"] = 0
+#     st.session_state['history_chats'].remove(current_chat)
+#     remove_data(st.session_state["path"], current_chat)
 
 
 # with st.sidebar:
