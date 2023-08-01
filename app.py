@@ -14,8 +14,8 @@ st.markdown(css_code, unsafe_allow_html=True)
 
 if "initial_settings" not in st.session_state:
     # 历史聊天窗口
-    st.session_state["path"] = 'history_chats_file'
-    st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
+    #st.session_state["path"] = 'history_chats_file'
+    #st.session_state['history_chats'] = get_history_chats(st.session_state["path"])
     # ss参数初始化
     st.session_state['delete_dict'] = {}
     st.session_state['delete_count'] = 0
