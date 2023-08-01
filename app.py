@@ -8,7 +8,7 @@ from requests.models import ChunkedEncodingError
 from streamlit.components import v1
 from voice_toolkit import voice_toolkit
 
-st.set_page_config(page_title='ChatGPT Assistant', layout='wide', page_icon='None', initial_sidebar_state="collapsed")
+st.set_page_config(page_title='ChatGPT Assistant', layout='wide', page_icon='None', initial_sidebar_state="auto")
 # 自定义元素样式
 st.markdown(css_code, unsafe_allow_html=True)
 
@@ -35,7 +35,7 @@ if "initial_settings" not in st.session_state:
     st.session_state["initial_settings"] = True
 
 with st.sidebar:
-    st.markdown("# 🤖 聊天窗口")
+    st.markdown("#  聊天窗口")
     # 创建容器的目的是配合自定义组件的监听操作
     chat_container = st.container()
     with chat_container:
